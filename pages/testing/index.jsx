@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import Link from "next/link";
 import path from "path";
 
 const testingServerSideRender = (props) => {
@@ -20,7 +21,11 @@ const testingServerSideRender = (props) => {
   return (
     <ul>
       {products.map((product) => {
-        return <li key={product.id}>{product.product}</li>;
+        return (
+          <li key={product.id}>
+            <Link href={`/testing/${product.id}`}>{product.product}</Link>
+          </li>
+        );
       })}
     </ul>
   );
@@ -34,6 +39,7 @@ export async function getStaticProps() {
     props: {
       products: data.products,
     },
+    // revalidate: 10,    this would regenerate the current page after every 10sec interval, only in production mode, in development mode this would regenerate upon every request for the current page.
   };
 }
 
