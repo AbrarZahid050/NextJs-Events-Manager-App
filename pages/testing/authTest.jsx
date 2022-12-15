@@ -2,6 +2,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function authTest() {
   const { data: session } = useSession();
+  console.log(session);
 
   const clickHandler = async () => {
     const response = await fetch("/api/restricted", {
